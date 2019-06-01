@@ -1,5 +1,6 @@
 package sadiq.raza.anydo;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
@@ -332,6 +333,9 @@ public class AllTasks extends Fragment implements OnBackPressed, View.OnClickLis
                                                                     //new AlarmReceiver().onReceive(getContext(),intent);
                                                                     addEditText.setText("");
                                                                     Toast.makeText(getContext(),"Task saved successfully",Toast.LENGTH_SHORT).show();
+                                                                    Activity ac =getActivity();
+                                                                    ac.finish();
+                                                                    startActivity(ac.getIntent());
 
                                                                 }
                                                             }, mHour, mMinute, false);
