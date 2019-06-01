@@ -76,7 +76,7 @@ public class Settings extends Fragment {
                  HashMap<String,String> map = MainActivity.hm;
                  if(map!=null)
                  {
-                        String test="24-05-201912:53"; //Delete task on this test dateTime
+                        String test="01-06-201915:30"; //Delete task on this test dateTime
                         boolean success=delTask(map,test);
                         if(!success)
                             Toast.makeText(getContext(), "No Task availabe at this date and time", Toast.LENGTH_SHORT).show();
@@ -117,6 +117,7 @@ public class Settings extends Fragment {
     boolean delTask(HashMap<String,String> hashMap,String dateTime) //format for dateTime argument dd-MM-yyyyhh:mm
     {
         String keyToRemove="";
+        boolean flag=false;
         for(Map.Entry<String,String> e : hashMap.entrySet())
         {
             String time="";
@@ -137,12 +138,13 @@ public class Settings extends Fragment {
                 ddd=""+dd+"-"+mm+"-"+yy;
 
             ddd+=time;
-            Log.e("delete",""+ddd);
+            Log.e("delete",dateTime+" "+ddd);
             if(dateTime.equals(ddd))
             {
                 keyToRemove=e.getKey();
                 hashMap.remove(keyToRemove);
-                return true;
+                flag=true;
+                break;
             }
         }
         //hashMap.put(key,value);
@@ -156,7 +158,7 @@ public class Settings extends Fragment {
             editor.putString("My_map", jsonString);
             editor.commit();
         }
-        return false;
+        return flag;
 
     }
 }
