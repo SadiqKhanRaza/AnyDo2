@@ -5,9 +5,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_any_do"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon_any_do"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
@@ -20,7 +20,7 @@
         <activity android:name=".Test"></activity>
         <activity android:name=".AddActivity" />
         <receiver
-            android:name=".AlarmReceiver"
+            android:name="AlarmReceiver"
             android:label="BroadcastReceiverAux">
             <intent-filter>
                 <action android:name="ALARM" />

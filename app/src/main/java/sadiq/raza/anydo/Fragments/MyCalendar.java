@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
@@ -26,6 +27,7 @@ import java.util.Objects;
 
 import sadiq.raza.anydo.MainActivity;
 import sadiq.raza.anydo.MyDs;
+import sadiq.raza.anydo.MyListAdapter;
 import sadiq.raza.anydo.R;
 import sadiq.raza.anydo.Task;
 import sun.bob.mcalendarview.MCalendarView;
@@ -70,6 +72,7 @@ public class MyCalendar extends Fragment {
         {
             e.printStackTrace();
         }*/
+        myDs= new ArrayList<MyDs>();
         for(Map.Entry<String,String> e : map.entrySet())
         {
             String Task="";
@@ -81,7 +84,6 @@ public class MyCalendar extends Fragment {
             mm=Integer.parseInt(arr[1]);
             dd=Integer.parseInt(arr[0]);
             time=arr[3];
-            myDs= new ArrayList<MyDs>();
             myDs.add(new MyDs(Task,time,yy,mm,dd));
             Log.e("date",yy+","+mm+","+dd);
             mCalendarView.markDate(new DateData(yy, mm, dd));
@@ -92,6 +94,8 @@ public class MyCalendar extends Fragment {
             public void onDateClick(View view, DateData date) {
                 StringBuilder sb = new StringBuilder("");
                 boolean flag=false;
+                if(myDs==null)
+                    return;
                 for(MyDs d : myDs)
                 {
                     if(d.getDayString().equals(date.getDayString())) {
@@ -101,9 +105,11 @@ public class MyCalendar extends Fragment {
                         sb.append("At : ");
                         sb.append(d.getTime());
                         sb.append("\n");
+                        sb.append("\n");
+
                     }
                 }
-                if(!flag)
+                if(sb.length()<2)
                     sb.append("No Task on this day ");
                 //Toast.makeText(getContext(),sb.toString(), Toast.LENGTH_SHORT).show();
                 LayoutInflater inflater = (LayoutInflater) Objects.requireNonNull(getContext())
@@ -132,7 +138,13 @@ public class MyCalendar extends Fragment {
                 pw.showAtLocation(layout,Gravity.CENTER,0,0);
             }
         });
-        mCalendarView.markDate(2019,5,15);
+        //mCalendarView.markDate(2019,5,15);
+
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        MyListAdapter adapter = new MyListAdapter(map);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
 
         return view;
     }

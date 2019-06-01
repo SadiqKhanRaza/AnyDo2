@@ -46,6 +46,7 @@
             android:layout_marginBottom="15dp">
 
             <TextView
+                android:id="@+id/todayTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
@@ -87,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
                 android:text="Tomorrow"
+                android:id="@+id/tomorrowTv"
                 android:textColor="#2196F3"
                 android:textStyle="bold"
                 android:textSize="16dp"/>
@@ -123,6 +125,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
                 android:text="Upcoming"
+                android:id="@+id/upcomingTv"
                 android:textColor="#2196F3"
                 android:textStyle="bold"
                 android:textSize="16dp"/>

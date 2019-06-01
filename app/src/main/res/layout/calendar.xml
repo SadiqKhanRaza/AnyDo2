@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,8 +8,9 @@
     android:background="#f1f5f7">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
         app:title="All Task"
         app:titleTextColor="#212121">
 
@@ -20,45 +21,48 @@
             <ImageButton
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/menu"
+                android:layout_centerVertical="true"
                 android:background="@android:color/transparent"
-                android:layout_centerVertical="true"/>
+                android:src="@drawable/menu" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:textColor="#212121"
+                android:layout_centerInParent="true"
                 android:text="Calendar"
                 android:textAllCaps="true"
-                android:layout_centerInParent="true"/>
+                android:textColor="#212121"
+                android:textSize="17dp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="15dp">
+        android:layout_below="@+id/toolbar2"
+        android:layout_height="340dp"
+        android:orientation="vertical">
 
         <sun.bob.mcalendarview.MCalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:context=".MainActivity"
-            />
-        <!--<sun.bob.mcalendarview.views.ExpCalendarView
-            android:id="@+id/calendar_exp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             tools:context=".MainActivity" />
-            android:dateTextAppearance="android:TextAppearance.DeviceDefault.Small"
-            android:theme="@style/CalenderViewCustom"
-            android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
-            app:layout_constraintBottom_toBottomOf="parent"-->
-        />
+
     </LinearLayout>
-</LinearLayout>
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:scrollbars="vertical"
+        tools:context="example.javatpoint.com.recyclerviewlist.MainActivity">
+
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>

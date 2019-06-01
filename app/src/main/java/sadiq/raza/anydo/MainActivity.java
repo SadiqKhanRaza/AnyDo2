@@ -11,9 +11,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.Date;
 import java.util.HashMap;
 import  java.util.Calendar;
 import java.util.Objects;
@@ -26,26 +28,32 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     Fragment fragment;
+    public static int requestCode=0;
     BottomNavigationView navigation;
+    Task t;
     public  static HashMap<String,String > hm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        boolean alarm = (PendingIntent.getBroadcast(this, 0, new Intent("ALARM"), PendingIntent.FLAG_NO_CREATE) == null);
+        Task t = new Task(MainActivity.this);
+        hm = t.loadMap();
+        boolean alarm = (PendingIntent.getBroadcast(this, (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE),
+                new Intent(Long.toString(System.currentTimeMillis())),PendingIntent.FLAG_ONE_SHOT) == null);
 
-        if(alarm) {
+        if(alarm){
+            Log.e("Main","Inside Alarm True");
             Intent itAlarm = new Intent("ALARM");
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, itAlarm, 0);
-            java.util.Calendar calendar = Calendar.getInstance();
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this,(int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE),itAlarm,0);
+            Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(System.currentTimeMillis());
             calendar.add(Calendar.SECOND, 3);
             AlarmManager alarme = (AlarmManager) getSystemService(ALARM_SERVICE);
-            Objects.requireNonNull(alarme).setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60000, pendingIntent);
+            Objects.requireNonNull(alarme).setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),600, pendingIntent);
         }
-//        toolbar = findViewById(R.id.toolbar);
 
+//        toolbar = findViewById(R.id.toolbar);
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -77,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_Calendar:
+                    hm=null;
+                    hm=new Task(MainActivity.this).loadMap();
                     loadFragment(new MyCalendar());
-                    Task t = new Task(MainActivity.this);
-                    hm = t.loadMap();
                     //Toast.makeText(MainActivity.this, " map  : "+hm, Toast.LENGTH_SHORT).show();
 //                    toolbar.setTitle("MyCalendar");
                     return true;
@@ -105,5 +113,9 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }

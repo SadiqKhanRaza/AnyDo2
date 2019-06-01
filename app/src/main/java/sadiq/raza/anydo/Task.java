@@ -15,7 +15,7 @@ public  class Task {
         {
             this.context=context;
         }
-        void saveMap(String key,String value){
+        public void saveMap(String key,String value){
             SharedPreferences pSharedPref = context.getSharedPreferences("db", Context.MODE_PRIVATE);
             if (pSharedPref != null){
                 HashMap<String ,String> hm =loadMap();
@@ -29,7 +29,7 @@ public  class Task {
             }
         }
 
-        HashMap<String,String> loadMap(){
+        public HashMap<String,String> loadMap(){
             HashMap<String,String> outputMap = new HashMap<String,String>();
             SharedPreferences pSharedPref = context.getSharedPreferences("db", Context.MODE_PRIVATE);
             try{
