@@ -161,4 +161,18 @@ public class Settings extends Fragment {
         return flag;
 
     }
+    void editTask(HashMap<String,String> hashMap,String dateTime,String newTask)//Eg dateTime in fromat "28-6-2019-23:54"
+    {
+        delTask(hashMap,dateTime);
+        SharedPreferences pSharedPref = getContext().getSharedPreferences("db", Context.MODE_PRIVATE);
+        if (pSharedPref != null){
+            hashMap.put(newTask,dateTime);
+            JSONObject jsonObject = new JSONObject(hashMap);
+            String jsonString = jsonObject.toString();
+            SharedPreferences.Editor editor = pSharedPref.edit();
+            editor.remove("My_map").apply();
+            editor.putString("My_map", jsonString);
+            editor.commit();
+        }
+    }
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +49,7 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
             Log.e("date",yy+","+mm+","+dd);
 
         }
+        myListData.sort(Comparator.comparing(MyDs::getYear).thenComparing(MyDs::getMonth).thenComparing(MyDs::getDay));
         holder.textView.setText(myListData.get(position).getDay()+" -> "+ myListData.get(position).getTask()+" At : "+myListData.get(position).getTime());
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override

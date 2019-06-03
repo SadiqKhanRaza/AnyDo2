@@ -322,6 +322,7 @@ public class AllTasks extends Fragment implements OnBackPressed, View.OnClickLis
                                                                     int dd=Integer.parseInt(arr[0]);
                                                                     String time =arr[3];
                                                                     t.saveMap(taskt,txtDate+"-"+txtTime);
+                                                                    Log.e("ddddd",txtDate+"-"+txtTime);
                                                                     Log.e("savibnggggg","saved");
                                                                     AlarmReceiver am = new AlarmReceiver();
                                                                     String dte=""+dd+"-"+mm+"-"+yy;
