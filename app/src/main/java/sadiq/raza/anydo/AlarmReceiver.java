@@ -26,8 +26,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        Toast.makeText(context, "Hello Saubhik Singh", Toast.LENGTH_SHORT).show();
+
         String date="26-05-2019",hour="16:03",h2="00:52";
-        String taskString[]=intent.getStringArrayExtra("TaskDetail");
+        String[] taskString = intent.getStringArrayExtra("TaskDetail");
         if(taskString==null)
             return;
         Log.e("taskString ","ll"+taskString[1]+" , "+taskString[2]);
