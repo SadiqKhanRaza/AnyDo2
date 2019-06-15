@@ -299,7 +299,7 @@ public class AllTasks extends Fragment implements OnBackPressed, View.OnClickLis
 
                                                                     t.saveMap(taskt,txtDate+"-"+txtTime);
                                                                     Calendar cal =Calendar.getInstance();
-                                                                    cal.add(Calendar.MINUTE,-5);
+                                                                    //cal.add(Calendar.MINUTE,-5);
                                                                     callAlarm(cal,view,view1,"You have a task to do", taskt);
 
                                                                     //Log.e("ddddd",txtDate+"-"+txtTime);
@@ -437,7 +437,19 @@ public class AllTasks extends Fragment implements OnBackPressed, View.OnClickLis
         Intent intent = new Intent(getContext(), sadiq.raza.anydo.Receivers.AlarmReceiver.class);
         intent.putExtra("title",title);
         intent.putExtra("description",description);
-        cal.set(datePicker.getYear(),datePicker.getMonth(),datePicker.getDayOfMonth(),timePicker.getHour(),timePicker.getMinute(),0);
+        int timeMin=timePicker.getMinute();
+        int timeHr=timePicker.getHour();
+            if(timeMin>=5)
+                timeMin-=5;
+            else
+            {
+                timeMin=55;
+                if(timeHr>=1)
+                    timeHr-=-1;
+                else
+                    timeHr=23;
+            }
+        cal.set(datePicker.getYear(),datePicker.getMonth(),datePicker.getDayOfMonth(),timeHr,timeMin,0);
         int r = new Random().nextInt(1000);
 
         AlarmUtils.setAlarm(Objects.requireNonNull(getContext()),intent,r,cal);
