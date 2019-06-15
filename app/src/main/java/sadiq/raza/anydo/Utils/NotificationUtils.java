@@ -7,6 +7,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
@@ -32,6 +35,21 @@ public class NotificationUtils {
 
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
+        Notification n = builder.build();
+        //create the notification
+        n.vibrate = new long[]{150, 300, 150, 400};
+        n.flags = Notification.FLAG_AUTO_CANCEL;
+        //manager.notify(R.drawable.ic_launcher_background, n);
+        //create a vibration
+        try {
+
+            Uri som = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone toque = RingtoneManager.getRingtone(context, som);
+            toque.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("saubhik", "myservice", NotificationManager.IMPORTANCE_HIGH);
             channel.setLightColor(Color.BLUE);
@@ -45,6 +63,7 @@ public class NotificationUtils {
         }
 
 
+        assert manager != null;
         manager.notify(123,builder.build());
     }
 
