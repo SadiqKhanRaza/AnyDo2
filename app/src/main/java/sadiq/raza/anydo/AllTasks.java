@@ -43,6 +43,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 import sadiq.raza.anydo.AddActivity;
 import sadiq.raza.anydo.Fragments.MyCalendar;
@@ -50,6 +51,7 @@ import sadiq.raza.anydo.OnBackPressed;
 import sadiq.raza.anydo.R;
 import sadiq.raza.anydo.MainActivity;
 import sadiq.raza.anydo.Task;
+import sadiq.raza.anydo.Utils.AlarmUtils;
 import sun.bob.mcalendarview.vo.DateData;
 
 public class AllTasks extends Fragment implements OnBackPressed, View.OnClickListener {
@@ -70,7 +72,6 @@ public class AllTasks extends Fragment implements OnBackPressed, View.OnClickLis
     private int mYear, mMonth, mDay, mHour, mMinute;
 
     public AllTasks() {
-        // Required empty public constructor
     }
 
     @Override
@@ -82,7 +83,6 @@ public class AllTasks extends Fragment implements OnBackPressed, View.OnClickLis
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.all_task, container, false);
 
         toolbar = view.findViewById(R.id.toolbar);
@@ -90,163 +90,143 @@ public class AllTasks extends Fragment implements OnBackPressed, View.OnClickLis
 
         today=view.findViewById(R.id.todayTv);
        final HashMap<String ,String > map=MainActivity.hm;
-        today.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDs= new ArrayList<MyDs>();
-                for(Map.Entry<String,String> e : map.entrySet())
-                {
-                    String Task="";
-                    String time="";
-                    int yy=0,mm=0,dd=0;
-                    Task=e.getKey();
-                    String arr[]=e.getValue().split("-");
-                    yy=Integer.parseInt(arr[2]);
-                    mm=Integer.parseInt(arr[1]);
-                    dd=Integer.parseInt(arr[0]);
-                    time=arr[3];
-                    Date c = Calendar.getInstance().getTime();
-                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                    String formattedDate = df.format(c);
-                    String ddd="";
-                    if(mm<10)
-                         ddd=""+dd+"-0"+mm+"-"+yy;
-                    else
-                        ddd=""+dd+"-"+mm+"-"+yy;
-                    if(formattedDate.equals(ddd))
-                        myDs.add(new MyDs(Task,time,yy,mm,dd));
-                    Log.e("date",formattedDate+" : "+ddd);
-
-                    //mCalendarView.setMarkStyle(MarkStyle.BACKGROUND);
-                }
-                StringBuilder sb = new StringBuilder("");
-                boolean flag=false;
-                if(myDs==null)
-                    return;
-                for(MyDs d : myDs)
-                {
-                    {
-                        flag = true;
-                        sb.append(d.getTask());
-                        sb.append("\n");
-                        sb.append("At : ");
-                        sb.append(d.getTime());
-                        sb.append("\n");
-                        sb.append("\n");
-
-                    }
-                }
-                if(sb.length()<2)
-                    sb.append("No Task on this day ");
-                //Toast.makeText(getContext(),sb.toString(), Toast.LENGTH_SHORT).show();
-                LayoutInflater inflater = (LayoutInflater) Objects.requireNonNull(getContext())
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View layout = Objects.requireNonNull(inflater).inflate(R.layout.popup,null);
-                ((TextView)layout.findViewById(R.id.textView)).setText(sb.toString());
-                float density=getContext().getResources().getDisplayMetrics().density;
-                // create a focusable PopupWindow with the given layout and correct size
-                final PopupWindow pw = new PopupWindow(layout, (int)density*240, (int)density*285, true);
-                //Button to close the pop-up
-                ((Button) layout.findViewById(R.id.close)).setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        pw.dismiss();
-                    }
-                });
-                pw.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                pw.setTouchInterceptor(new View.OnTouchListener() {
-                    public boolean onTouch(View v, MotionEvent event) {
-                        if(event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                            //pw.dismiss();
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-                pw.showAtLocation(layout,Gravity.CENTER,0,0);
-
+        today.setOnClickListener(view12 -> {
+            myDs= new ArrayList<MyDs>();
+            for(Map.Entry<String,String> e : map.entrySet())
+            {
+                String Task="";
+                String time="";
+                int yy=0,mm=0,dd=0;
+                Task=e.getKey();
+                String arr[]=e.getValue().split("-");
+                yy=Integer.parseInt(arr[2]);
+                mm=Integer.parseInt(arr[1]);
+                dd=Integer.parseInt(arr[0]);
+                time=arr[3];
+                Date c = Calendar.getInstance().getTime();
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                String formattedDate = df.format(c);
+                String ddd="";
+                if(mm<10)
+                     ddd=""+dd+"-0"+mm+"-"+yy;
+                else
+                    ddd=""+dd+"-"+mm+"-"+yy;
+                if(formattedDate.equals(ddd))
+                    myDs.add(new MyDs(Task,time,yy,mm,dd));
+                Log.e("date",formattedDate+" : "+ddd);
             }
+            StringBuilder sb = new StringBuilder("");
+            if(myDs==null)
+                return;
+            for(MyDs d : myDs)
+            {
+                {
+                    sb.append(d.getTask());
+                    sb.append("\n");
+                    sb.append("At : ");
+                    sb.append(d.getTime());
+                    sb.append("\n");
+                    sb.append("\n");
+
+                }
+            }
+            if(sb.length()<2)
+                sb.append("No Task on this day ");
+            LayoutInflater inflater1 = (LayoutInflater) Objects.requireNonNull(getContext())
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = Objects.requireNonNull(inflater1).inflate(R.layout.popup,null);
+            ((TextView)layout.findViewById(R.id.textView)).setText(sb.toString());
+            float density=getContext().getResources().getDisplayMetrics().density;
+            final PopupWindow pw = new PopupWindow(layout, (int)density*240, (int)density*285, true);
+            (layout.findViewById(R.id.close)).setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    pw.dismiss();
+                }
+            });
+            pw.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            pw.setTouchInterceptor(new View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    if(event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                        //pw.dismiss();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            pw.showAtLocation(layout,Gravity.CENTER,0,0);
+
         });
 
-        view.findViewById(R.id.tomorrowTv).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDs= new ArrayList<MyDs>();
-                for(Map.Entry<String,String> e : map.entrySet())
-                {
-                    String Task="";
-                    String time="";
-                    int yy=0,mm=0,dd=0;
-                    Task=e.getKey();
-                    String arr[]=e.getValue().split("-");
-                    yy=Integer.parseInt(arr[2]);
-                    mm=Integer.parseInt(arr[1]);
-                    dd=Integer.parseInt(arr[0]);
-                    time=arr[3];
-                    Calendar c = Calendar.getInstance();
-                    c.add(Calendar.DATE,1);
-                    @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                    String formattedDate = df.format(c.getTime());
-                    String ddd="";
-                    if(mm<10 && dd>=10)
-                        ddd=""+dd+"-0"+mm+"-"+yy;
-                    else if(mm<10)
-                        ddd="0"+dd+"-0"+mm+"-"+yy;
-                    else if(dd < 10)
-                        ddd="0"+dd+"-"+mm+"-"+yy;
-                    else
-                        ddd=""+dd+"-"+mm+"-"+yy;
-                    if(formattedDate.equals(ddd))
-                        myDs.add(new MyDs(Task,time,yy,mm,dd));
-                    Log.e("date22",formattedDate+" : "+ddd);
-
-                    //mCalendarView.setMarkStyle(MarkStyle.BACKGROUND);
-                }
-                StringBuilder sb = new StringBuilder("");
-                boolean flag=false;
-                if(myDs==null)
-                    return;
-                for(MyDs d : myDs)
-                {
-                    {
-                        flag = true;
-                        sb.append(d.getTask());
-                        sb.append("\n");
-                        sb.append("At : ");
-                        sb.append(d.getTime());
-                        sb.append("\n");
-                        sb.append("\n");
-
-                    }
-                }
-                if(sb.length()<2)
-                    sb.append("No Task on this day ");
-                //Toast.makeText(getContext(),sb.toString(), Toast.LENGTH_SHORT).show();
-                LayoutInflater inflater = (LayoutInflater) Objects.requireNonNull(getContext())
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View layout = Objects.requireNonNull(inflater).inflate(R.layout.popup,null);
-                ((TextView)layout.findViewById(R.id.textView)).setText(sb.toString());
-                float density=getContext().getResources().getDisplayMetrics().density;
-                // create a focusable PopupWindow with the given layout and correct size
-                final PopupWindow pw = new PopupWindow(layout, (int)density*240, (int)density*285, true);
-                //Button to close the pop-up
-                ((Button) layout.findViewById(R.id.close)).setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        pw.dismiss();
-                    }
-                });
-                pw.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                pw.setTouchInterceptor(new View.OnTouchListener() {
-                    public boolean onTouch(View v, MotionEvent event) {
-                        if(event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                            //pw.dismiss();
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-                pw.showAtLocation(layout,Gravity.CENTER,0,0);
-
+        view.findViewById(R.id.tomorrowTv).setOnClickListener(view13 -> {
+            myDs= new ArrayList<MyDs>();
+            for(Map.Entry<String,String> e : map.entrySet())
+            {
+                String Task="";
+                String time="";
+                int yy=0,mm=0,dd=0;
+                Task=e.getKey();
+                String arr[]=e.getValue().split("-");
+                yy=Integer.parseInt(arr[2]);
+                mm=Integer.parseInt(arr[1]);
+                dd=Integer.parseInt(arr[0]);
+                time=arr[3];
+                Calendar c = Calendar.getInstance();
+                c.add(Calendar.DATE,1);
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                String formattedDate = df.format(c.getTime());
+                String ddd="";
+                if(mm<10 && dd>=10)
+                    ddd=""+dd+"-0"+mm+"-"+yy;
+                else if(mm<10)
+                    ddd="0"+dd+"-0"+mm+"-"+yy;
+                else if(dd < 10)
+                    ddd="0"+dd+"-"+mm+"-"+yy;
+                else
+                    ddd=""+dd+"-"+mm+"-"+yy;
+                if(formattedDate.equals(ddd))
+                    myDs.add(new MyDs(Task,time,yy,mm,dd));
+                Log.e("date22",formattedDate+" : "+ddd);
             }
+            StringBuilder sb = new StringBuilder("");
+            if(myDs==null)
+                return;
+            for(MyDs d : myDs)
+            {
+                {
+                    sb.append(d.getTask());
+                    sb.append("\n");
+                    sb.append("At : ");
+                    sb.append(d.getTime());
+                    sb.append("\n");
+                    sb.append("\n");
+
+                }
+            }
+            if(sb.length()<2)
+                sb.append("No Task on this day ");
+            LayoutInflater inflater12 = (LayoutInflater) Objects.requireNonNull(getContext())
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = Objects.requireNonNull(inflater12).inflate(R.layout.popup,null);
+            ((TextView)layout.findViewById(R.id.textView)).setText(sb.toString());
+            float density=getContext().getResources().getDisplayMetrics().density;
+            final PopupWindow pw = new PopupWindow(layout, (int)density*240, (int)density*285, true);
+            (layout.findViewById(R.id.close)).setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    pw.dismiss();
+                }
+            });
+            pw.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            pw.setTouchInterceptor(new View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    if(event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                        //pw.dismiss();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            pw.showAtLocation(layout,Gravity.CENTER,0,0);
+
         });
 
         view.findViewById(R.id.upcomingTv).setOnClickListener(new View.OnClickListener() {
@@ -298,40 +278,38 @@ public class AllTasks extends Fragment implements OnBackPressed, View.OnClickLis
                                                                       int monthOfYear, int dayOfMonth) {
 
                                                     txtDate=dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                                                    Toast.makeText(getContext(), txtDate, Toast.LENGTH_SHORT).show();
                                                     final Calendar c = Calendar.getInstance();
                                                     mHour = c.get(Calendar.HOUR_OF_DAY);
                                                     mMinute = c.get(Calendar.MINUTE);
 
-                                                    // Launch Time Picker Dialog
                                                     TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
                                                             new TimePickerDialog.OnTimeSetListener() {
 
                                                                 @Override
-                                                                public void onTimeSet(TimePicker view, int hourOfDay,
+                                                                public void onTimeSet(TimePicker view1, int hourOfDay,
                                                                                       int minute) {
 
                                                                     txtTime = hourOfDay + ":" + minute;
-                                                                    Toast.makeText(getContext(), txtTime, Toast.LENGTH_SHORT).show();
-                                                                    //HashMap<String,String >hm = new HashMap<>();
-                                                                    //hm.put(taskt,txtDate+txtTime);
                                                                     Task t = new Task(getContext());
                                                                     String arr[]=(txtDate+"-"+txtTime).split("-");
                                                                     int yy=Integer.parseInt(arr[2]);
                                                                     int mm=Integer.parseInt(arr[1]);
                                                                     int dd=Integer.parseInt(arr[0]);
                                                                     String time =arr[3];
+
                                                                     t.saveMap(taskt,txtDate+"-"+txtTime);
-                                                                    Log.e("ddddd",txtDate+"-"+txtTime);
-                                                                    Log.e("savibnggggg","saved");
-                                                                    AlarmReceiver am = new AlarmReceiver();
+                                                                    Calendar cal =Calendar.getInstance();
+                                                                    cal.add(Calendar.MINUTE,-5);
+                                                                    callAlarm(cal,view,view1,"You have a task to do", taskt);
+
+                                                                    //Log.e("ddddd",txtDate+"-"+txtTime);
+                                                                    //Log.e("savibnggggg","saved");
                                                                     String dte=""+dd+"-"+mm+"-"+yy;
-                                                                    Log.e("ffff",dte+"  ;  "+time);
+                                                                    //Log.e("ffff",dte+"  ;  "+time);
                                                                     Intent intent= new Intent("ALARM");
                                                                     String arr2[]={taskt,dte,time};
                                                                     intent.putExtra("TaskDetail",arr2);
                                                                     LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
-                                                                    //new AlarmReceiver().onReceive(getContext(),intent);
                                                                     addEditText.setText("");
                                                                     Toast.makeText(getContext(),"Task saved successfully",Toast.LENGTH_SHORT).show();
                                                                     Activity ac =getActivity();
@@ -346,28 +324,6 @@ public class AllTasks extends Fragment implements OnBackPressed, View.OnClickLis
                                             }, mYear, mMonth, mDay);
                                     datePickerDialog.show();
                                 }
-                                /*if (v == btnTimePicker) {
-
-                                    // Get Current Time
-                                    final MyCalendar c = MyCalendar.getInstance();
-                                    mHour = c.get(MyCalendar.HOUR_OF_DAY);
-                                    mMinute = c.get(MyCalendar.MINUTE);
-
-                                    // Launch Time Picker Dialog
-                                    TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                                            new TimePickerDialog.OnTimeSetListener() {
-
-                                                @Override
-                                                public void onTimeSet(TimePicker view, int hourOfDay,
-                                                                      int minute) {
-
-                                                    txtTime.setText(hourOfDay + ":" + minute);
-                                                }
-                                            }, mHour, mMinute, false);
-                                    timePickerDialog.show();
-                                }
-                            }*/
-
                         }
                     });
                     scrollView.setVisibility(View.VISIBLE);
@@ -475,5 +431,15 @@ public class AllTasks extends Fragment implements OnBackPressed, View.OnClickLis
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void callAlarm(Calendar cal, DatePicker datePicker,TimePicker timePicker,String title, String description){
+        Intent intent = new Intent(getContext(), sadiq.raza.anydo.Receivers.AlarmReceiver.class);
+        intent.putExtra("title",title);
+        intent.putExtra("description",description);
+        cal.set(datePicker.getYear(),datePicker.getMonth(),datePicker.getDayOfMonth(),timePicker.getHour(),timePicker.getMinute(),0);
+        int r = new Random().nextInt(1000);
+
+        AlarmUtils.setAlarm(Objects.requireNonNull(getContext()),intent,r,cal);
     }
 }

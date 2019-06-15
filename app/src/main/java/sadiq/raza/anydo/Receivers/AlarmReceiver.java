@@ -13,7 +13,6 @@ public class AlarmReceiver extends BroadcastReceiver {
     int requestCode=123;
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "Hello Saubhik", Toast.LENGTH_LONG).show();
         if(intent!=null){
              title= intent.getStringExtra("title");
             description = intent.getStringExtra("description");

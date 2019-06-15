@@ -42,7 +42,6 @@ public class MyCalendar extends Fragment {
     private ArrayList<MyDs> myDs;
 
     public MyCalendar() {
-        // Required empty public constructor
     }
 
     @Override
@@ -53,7 +52,6 @@ public class MyCalendar extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.calendar, container, false);
         MCalendarView mCalendarView = view.findViewById(R.id.calendarView);
         Log.e("map", "" + MainActivity.hm);
@@ -61,17 +59,6 @@ public class MyCalendar extends Fragment {
         MarkedDates m = mCalendarView.getMarkedDates();
         m.removeAdd();
         Log.e("MdDs map ",""+map);
-        /*ArrayList<DateData> dList = m.getAll();
-        try {
-            if (dList != null) {
-                for (DateData d : dList)
-                    mCalendarView.unMarkDate(d);
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }*/
         myDs= new ArrayList<MyDs>();
         for(Map.Entry<String,String> e : map.entrySet())
         {
@@ -87,19 +74,16 @@ public class MyCalendar extends Fragment {
             myDs.add(new MyDs(Task,time,yy,mm,dd));
             Log.e("date",yy+","+mm+","+dd);
             mCalendarView.markDate(new DateData(yy, mm, dd));
-                    //mCalendarView.setMarkStyle(MarkStyle.BACKGROUND);
         }
         mCalendarView.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(View view, DateData date) {
                 StringBuilder sb = new StringBuilder("");
-                boolean flag=false;
                 if(myDs==null)
                     return;
                 for(MyDs d : myDs)
                 {
                     if(d.getDayString().equals(date.getDayString())) {
-                        flag = true;
                         sb.append(d.getTask());
                         sb.append("\n");
                         sb.append("At : ");
@@ -117,14 +101,8 @@ public class MyCalendar extends Fragment {
                 View layout = Objects.requireNonNull(inflater).inflate(R.layout.popup,null);
                 ((TextView)layout.findViewById(R.id.textView)).setText(sb.toString());
                 float density=getContext().getResources().getDisplayMetrics().density;
-                // create a focusable PopupWindow with the given layout and correct size
                 final PopupWindow pw = new PopupWindow(layout, (int)density*240, (int)density*285, true);
-                //Button to close the pop-up
-                ((Button) layout.findViewById(R.id.close)).setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        pw.dismiss();
-                    }
-                });
+                (layout.findViewById(R.id.close)).setOnClickListener(v -> pw.dismiss());
                 pw.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 pw.setTouchInterceptor(new View.OnTouchListener() {
                     public boolean onTouch(View v, MotionEvent event) {
@@ -138,9 +116,7 @@ public class MyCalendar extends Fragment {
                 pw.showAtLocation(layout,Gravity.CENTER,0,0);
             }
         });
-        //mCalendarView.markDate(2019,5,15);
-
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         MyListAdapter adapter = new MyListAdapter(map);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

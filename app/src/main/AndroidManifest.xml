@@ -10,25 +10,15 @@
         android:roundIcon="@mipmap/icon_any_do"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Test2">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Test"></activity>
         <activity android:name=".AddActivity" />
-        <receiver
-            android:name=".AlarmReceiver"
-            android:label="BroadcastReceiverAux">
-            <intent-filter>
-                <action android:name="ALARM" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </receiver>
         <receiver android:name=".Receivers.AlarmReceiver" />
     </application>
 

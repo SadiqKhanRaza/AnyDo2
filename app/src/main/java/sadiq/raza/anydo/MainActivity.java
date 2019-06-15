@@ -64,12 +64,6 @@ public class MainActivity extends AppCompatActivity {
         loadFragment(new AllTasks());
 
 
-
-
-
-//        toolbar.setTitle("All Tasks");
-//        toolbar.setBackgroundDrawable(new ColorDrawable(getResources()
-//                .getColor(R.color.white)));
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -80,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_Task:
-//                    toolbar.setTitle("All Task");
                     fragment = new AllTasks();
                     loadFragment(fragment);
                     return true;
@@ -88,12 +81,9 @@ public class MainActivity extends AppCompatActivity {
                     hm=null;
                     hm=new Task(MainActivity.this).loadMap();
                     loadFragment(new MyCalendar());
-                    //Toast.makeText(MainActivity.this, " map  : "+hm, Toast.LENGTH_SHORT).show();
-//                    toolbar.setTitle("MyCalendar");
                     return true;
                 case R.id.navigation_Settings:
                     loadFragment(new Settings());
-//                    toolbar.setTitle("Settings");
                     return true;
 
             }
@@ -102,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void loadFragment(Fragment fragment) {
-        // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);

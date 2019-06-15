@@ -33,7 +33,6 @@ public class Settings extends Fragment {
     private RecyclerView recyclerView;
 
     public Settings() {
-        // Required empty public constructor
     }
 
     @Override
@@ -44,45 +43,35 @@ public class Settings extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.settings, container, false);
-         view.findViewById(R.id.del).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+         view.findViewById(R.id.del).setOnClickListener(view1 -> new AlertDialog.Builder(getContext())
+                 .setTitle("Delete Task")
+                 .setMessage("Are you sure you want to delete all taks ?")
 
-                new AlertDialog.Builder(getContext())
-                        .setTitle("Delete Task")
-                        .setMessage("Are you sure you want to delete all taks ?")
+                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                     public void onClick(DialogInterface dialog, int which) {
+                         SharedPreferences pSharedPref = Objects.requireNonNull(getActivity()).getSharedPreferences("db", Context.MODE_PRIVATE);
+                         SharedPreferences.Editor editor = pSharedPref.edit();
+                         editor.clear();
+                         editor.apply();
+                         Toast.makeText(getContext(), "All Tasks deleted successfully", Toast.LENGTH_SHORT).show();
+                     }
+                 })
 
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                SharedPreferences pSharedPref = Objects.requireNonNull(getActivity()).getSharedPreferences("db", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = pSharedPref.edit();
-                                editor.clear();
-                                editor.apply();
-                                Toast.makeText(getContext(), "All Tasks deleted successfully", Toast.LENGTH_SHORT).show();
-                            }
-                        })
+                 .setNegativeButton(android.R.string.no, null)
+                 .setIcon(android.R.drawable.ic_dialog_alert)
+                 .show());
 
-                        .setNegativeButton(android.R.string.no, null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-            }
-        });
-
-         view.findViewById(R.id.del2).setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 HashMap<String,String> map = MainActivity.hm;
-                 if(map!=null)
-                 {
-                        String test="01-06-201915:30"; //Delete task on this test dateTime
-                        boolean success=delTask(map,test);
-                        if(!success)
-                            Toast.makeText(getContext(), "No Task availabe at this date and time", Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(getContext(), "Successfully deleted", Toast.LENGTH_SHORT).show();
-                 }
+         view.findViewById(R.id.del2).setOnClickListener(view12 -> {
+             HashMap<String,String> map = MainActivity.hm;
+             if(map!=null)
+             {
+                    String test="01-06-201915:30"; //Delete task on this test dateTime
+                    boolean success=delTask(map,test);
+                    if(!success)
+                        Toast.makeText(getContext(), "No Task availabe at this date and time", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getContext(), "Successfully deleted", Toast.LENGTH_SHORT).show();
              }
          });
 
@@ -147,7 +136,6 @@ public class Settings extends Fragment {
                 break;
             }
         }
-        //hashMap.put(key,value);
         JSONObject jsonObject = new JSONObject(hashMap);
         String jsonString = jsonObject.toString();
         SharedPreferences pSharedPref = Objects.requireNonNull(getContext()).getSharedPreferences("db", Context.MODE_PRIVATE);

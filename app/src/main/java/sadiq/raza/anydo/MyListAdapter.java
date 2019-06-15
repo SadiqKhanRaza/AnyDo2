@@ -70,8 +70,8 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
         public RelativeLayout relativeLayout;
         public ViewHolder(View itemView) {
             super(itemView);
-            this.textView = (TextView) itemView.findViewById(R.id.textView);
-            relativeLayout = (RelativeLayout)itemView.findViewById(R.id.relativeLayout);
+            this.textView = itemView.findViewById(R.id.textView);
+            relativeLayout =itemView.findViewById(R.id.relativeLayout);
         }
     }
 }
