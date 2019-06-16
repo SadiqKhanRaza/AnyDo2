@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="#f1f5f7">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -22,284 +22,338 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textStyle="bold"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="-15dp"
                 android:gravity="center"
-                android:textSize="16dp"
-                android:textColor="#212121"
                 android:text="All Tasks"
                 android:textAllCaps="true"
-                android:layout_centerInParent="true"/>
+                android:textColor="#212121"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
-
-    <RelativeLayout
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="15dp">
+        android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/today"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp">
 
-            <TextView
-                android:id="@+id/todayTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
-                android:text="Today"
-                android:textColor="#2196F3"
-                android:textStyle="bold"
-                android:textSize="16dp"/>
-
-            <ImageButton
-                android:id="@+id/addToday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_add"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/transparent"
-                android:layout_alignParentRight="true"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view_today"
+            <RelativeLayout
+                android:id="@+id/today"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:scrollbars="vertical"
-                android:paddingLeft="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_below="@id/addToday"/>
+                android:layout_marginBottom="15dp">
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/todayTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Today"
+                    android:layout_marginRight="50dp"
+                    android:textColor="#2196F3"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
 
-        <RelativeLayout
-            android:id="@+id/tomorrow"
-            android:layout_below="@id/today"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp">
+                <ImageButton
+                    android:id="@+id/addToday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_alignParentRight="true"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
-                android:text="Tomorrow"
-                android:id="@+id/tomorrowTv"
-                android:textColor="#2196F3"
-                android:textStyle="bold"
-                android:textSize="16dp"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_today"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"
+                    android:paddingLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@id/addToday"/>
 
-            <ImageButton
-                android:id="@+id/addTomorrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_add"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/transparent"
-                android:layout_alignParentRight="true"/>
+            </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view_tomorrow"
+            <RelativeLayout
+                android:id="@+id/tomorrow"
+                android:layout_below="@id/today"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:scrollbars="vertical"
-                android:paddingLeft="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_below="@id/addTomorrow"/>
+                android:layout_marginBottom="15dp">
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Tomorrow"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/tomorrowTv"
+                    android:textColor="#2196F3"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
 
-        <RelativeLayout
-            android:id="@+id/upcoming"
-            android:layout_below="@+id/tomorrow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/addTomorrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_alignParentRight="true"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
-                android:text="Upcoming"
-                android:id="@+id/upcomingTv"
-                android:textColor="#2196F3"
-                android:textStyle="bold"
-                android:textSize="16dp"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_tomorrow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"
+                    android:paddingLeft="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@id/addTomorrow"/>
 
-            <ImageButton
-                android:id="@+id/addUpcoming"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_add"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/transparent"
-                android:layout_alignParentRight="true"/>
+            </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view_upcoming"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:scrollbars="vertical"
-                android:paddingLeft="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_below="@id/addUpcoming"/>
-
-        </RelativeLayout>
-
-
-        <HorizontalScrollView
-            android:id="@+id/horizontalScroll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/layout"
-            android:paddingTop="10dp"
-            android:visibility="gone"
-            android:paddingBottom="10dp"
-            android:scrollbars="none"
-            android:background="#F5F5F5">
-
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/upcoming"
+                android:layout_below="@+id/tomorrow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/laterTody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Upcoming"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/upcomingTv"
+                    android:textColor="#2196F3"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
+
+                <ImageButton
+                    android:id="@+id/addUpcoming"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Later today"
-                    android:drawableLeft="@drawable/ic_bell"
-                    android:background="@drawable/text_background"
+                    android:src="@drawable/ic_add"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_alignParentRight="true"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_upcoming"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"
                     android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:drawablePadding="10dp"
-                    android:gravity="center"
-                    android:textColor="#757575"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/addUpcoming"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/remainder"
+                android:layout_below="@+id/upcoming"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/thisEvening"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="Remainder"
+                    android:layout_marginRight="50dp"
+                    android:id="@+id/remainderTv"
+                    android:textColor="#2196F3"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
+
+                <ImageButton
+                    android:id="@+id/addremainder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="This evening"
-                    android:drawableLeft="@drawable/ic_bell"
-                    android:background="@drawable/text_background"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:drawablePadding="10dp"
-                    android:gravity="center"
-                    android:textColor="#757575"
-                    android:paddingTop="3dp"
-                    android:layout_marginLeft="15dp"
-                    android:paddingBottom="3dp"/>
+                    android:src="@drawable/ic_add"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:layout_alignParentRight="true"/>
 
-                <TextView
-                    android:id="@+id/tomorrowMorning"
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_remainder"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tomorrow Morning"
-                    android:drawableLeft="@drawable/ic_bell"
-                    android:background="@drawable/text_background"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"
                     android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:drawablePadding="10dp"
-                    android:gravity="center"
-                    android:textColor="#757575"
-                    android:layout_marginLeft="15dp"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"/>
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@id/addremainder"/>
 
-                <TextView
-                    android:id="@+id/nextWeek"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Next week"
-                    android:drawableLeft="@drawable/ic_bell"
-                    android:background="@drawable/text_background"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:drawablePadding="10dp"
-                    android:gravity="center"
-                    android:textColor="#757575"
-                    android:layout_marginLeft="15dp"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"/>
-
-                <TextView
-                    android:id="@+id/Someday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Someday"
-                    android:drawableLeft="@drawable/ic_bell"
-                    android:background="@drawable/text_background"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:drawablePadding="10dp"
-                    android:gravity="center"
-                    android:textColor="#757575"
-                    android:layout_marginLeft="15dp"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"/>
-
-                <TextView
-                    android:id="@+id/Custom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Custom"
-                    android:drawableLeft="@drawable/ic_bell"
-                    android:background="@drawable/text_background"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:drawablePadding="10dp"
-                    android:gravity="center"
-                    android:textColor="#757575"
-                    android:layout_marginLeft="15dp"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"/>
+            </RelativeLayout>
 
 
-            </LinearLayout>
+            <HorizontalScrollView
+                android:id="@+id/horizontalScroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:visibility="gone"
+                android:paddingBottom="10dp"
+                android:scrollbars="none"
+                android:background="#F5F5F5">
 
-        </HorizontalScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/layout"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:weightSum="2"
-            android:layout_marginBottom="56dp"
-            android:background="@drawable/add_background">
+                    <TextView
+                        android:id="@+id/laterTody"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Later today"
+                        android:drawableLeft="@drawable/ic_bell"
+                        android:background="@drawable/text_background"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:textColor="#757575"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:layout_marginLeft="10dp"/>
 
-            <EditText
-                android:id="@+id/add_edittext"
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="40dp"
-                android:focusableInTouchMode="true"
-                android:layout_margin="5dp"
-                android:hint="I want to..."
-                android:paddingLeft="15dp"
-                android:background="@drawable/add_task"/>
+                    <TextView
+                        android:id="@+id/thisEvening"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This evening"
+                        android:drawableLeft="@drawable/ic_bell"
+                        android:background="@drawable/text_background"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:textColor="#757575"
+                        android:paddingTop="3dp"
+                        android:layout_marginLeft="15dp"
+                        android:paddingBottom="3dp"/>
+
+                    <TextView
+                        android:id="@+id/tomorrowMorning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tomorrow Morning"
+                        android:drawableLeft="@drawable/ic_bell"
+                        android:background="@drawable/text_background"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:textColor="#757575"
+                        android:layout_marginLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"/>
+
+                    <TextView
+                        android:id="@+id/nextWeek"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Next week"
+                        android:drawableLeft="@drawable/ic_bell"
+                        android:background="@drawable/text_background"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:textColor="#757575"
+                        android:layout_marginLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"/>
+
+                    <TextView
+                        android:id="@+id/Someday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Someday"
+                        android:drawableLeft="@drawable/ic_bell"
+                        android:background="@drawable/text_background"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:textColor="#757575"
+                        android:layout_marginLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"/>
+
+                    <TextView
+                        android:id="@+id/Custom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Custom"
+                        android:drawableLeft="@drawable/ic_bell"
+                        android:background="@drawable/text_background"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:textColor="#757575"
+                        android:layout_marginLeft="15dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"/>
 
 
-            <ImageButton
-                android:id="@+id/addButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/add_item"/>
-        </LinearLayout>
+                </LinearLayout>
+
+            </HorizontalScrollView>
 
 
-    </RelativeLayout>
-</LinearLayout>
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/add_background"
+        android:gravity="center"
+        android:layout_marginBottom="56dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:weightSum="2">
+
+        <EditText
+            android:id="@+id/add_edittext"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:background="@drawable/add_task"
+            android:focusableInTouchMode="true"
+            android:hint="I want to..."
+            android:paddingLeft="15dp" />
+
+
+        <ImageButton
+            android:id="@+id/addButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/add_item" />
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

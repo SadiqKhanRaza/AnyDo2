@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddActivity"
+    android:background="#f1f5f7">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:elevation="5dp"
+            android:background="#f1f5f7">
+
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycleview">
+        </android.support.v7.widget.RecyclerView>
+
+     <!--   <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:id="@+id/scrollview">
+
+                <LinearLayout
+                    android:id="@+id/main"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/vehicleDocuments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/ic_car_insurance"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Vehicle Documents"
+                                    android:layout_marginLeft="10dp"
+                                    android:textColor="@android:color/black"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/expand"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="50dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_driving_license"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Driving License"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_contract"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Pollution Documents"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_clipboards"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Others"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/personalDocuments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_marginTop="10dp">
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/ic_writing"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Personal Documents"
+                                    android:layout_marginLeft="10dp"
+                                    android:textColor="@android:color/black"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/expand1"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="50dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_id_card"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="PAN Card"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_visa"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Visa"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_passport"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Passport"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_clipboards"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Others"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:id="@+id/insurance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_marginTop="10dp">
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/ic_cv"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Insurance"
+                                    android:layout_marginLeft="10dp"
+                                    android:textColor="@android:color/black"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/expand2"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="50dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_bike"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Two Wheeler"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_car"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Four Wheeler"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_medicine"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Health"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/payments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="0dp"
+                            android:layout_marginTop="10dp">
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/ic_wallet"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Payments"
+                                    android:layout_marginLeft="10dp"
+                                    android:textColor="@android:color/black"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/expand3"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="50dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_bill"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Bill Payments"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_loan"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Loan"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_debit_card"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Credit Cards"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:id="@+id/events"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_marginTop="10dp">
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/ic_fireworks"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Events"
+                                    android:layout_marginLeft="10dp"
+                                    android:textColor="@android:color/black"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/expand4"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="50dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_balloons"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Birthday"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_gift"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Anniversary"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_meeting"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Meeting"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="15dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingTop="7dp"
+                                    android:paddingBottom="7dp"
+                                    android:layout_marginTop="10dp">
+
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:src="@drawable/ic_clipboards"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Others"
+                                            android:layout_marginLeft="10dp"
+                                            android:textColor="@android:color/black"/>
+                                </LinearLayout>
+                        </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+        </ScrollView> -->
+
+</LinearLayout>

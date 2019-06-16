@@ -119,9 +119,9 @@ public class AddActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         switch (id){
-            case R.id.mic:
+            case R.id.action_search:
 
-                Toast.makeText(this, "Add Mic Functionality", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Add Mic Functionality", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);

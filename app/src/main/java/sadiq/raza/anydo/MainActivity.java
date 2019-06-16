@@ -20,6 +20,7 @@ import java.util.HashMap;
 import  java.util.Calendar;
 import java.util.Objects;
 
+import sadiq.raza.anydo.Fragments.AllTasks;
 import sadiq.raza.anydo.Fragments.Settings;
 import sadiq.raza.anydo.Fragments.MyCalendar;
 

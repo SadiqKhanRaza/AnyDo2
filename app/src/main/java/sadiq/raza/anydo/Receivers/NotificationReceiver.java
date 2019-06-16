@@ -3,10 +3,7 @@ package sadiq.raza.anydo.Receivers;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
-import sadiq.raza.anydo.AllTasks;
 import sadiq.raza.anydo.MainActivity;
 
 public class NotificationReceiver extends BroadcastReceiver {

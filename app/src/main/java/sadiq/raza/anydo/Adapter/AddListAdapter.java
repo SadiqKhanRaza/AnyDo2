@@ -8,10 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import sadiq.raza.anydo.GetterSetter;
 import sadiq.raza.anydo.R;
-
-import java.util.ArrayList;
 
 public class AddListAdapter extends BaseAdapter {
 
